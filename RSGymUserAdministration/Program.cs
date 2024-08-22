@@ -30,7 +30,7 @@ namespace RSGymUserAdministration
                 ILoginService loginService = new LoginService(userService);
 
                 // Dados iniciais (seeding)
-                DataSeeder seeder = new DataSeeder(userService);
+                DataSeeder seeder = new DataSeeder(userRepository, userService);
                 seeder.Seed();
 
                 //IUser loggedInUser = UserUtility.Login(loginService);
@@ -83,30 +83,30 @@ namespace RSGymUserAdministration
                                     case 1:
                                         Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.Yellow;
-                                        RSGymUtility.WriteTitle("Create User", "", "\n");
+                                        RSGymUtility.WriteTitle($"Create User \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         UserUtility.InfoCreateUser(currentUser, userService);
                                         RSGymUtility.PauseConsole();
                                         break;
                                     case 2:
                                         Console.Clear();
-                                        RSGymUtility.WriteTitle("Edit User", "", "\n");
+                                        RSGymUtility.WriteTitle($"Edit User \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         UserUtility.EditUser(currentUser, userService);
                                         RSGymUtility.PauseConsole();
                                         break;
                                     case 3:
                                         Console.Clear();
-                                        RSGymUtility.WriteTitle("Search User", "", "\n");
+                                        RSGymUtility.WriteTitle($"Search User \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         int searchOption = AppUtility.SearchMenu(currentUser);
                                         switch (searchOption)
                                         {
                                             case 1:
                                                 Console.Clear();
-                                                RSGymUtility.WriteTitle("Search User by ID");
+                                                RSGymUtility.WriteTitle($"Search User by ID \t\t| Profile:{currentUser.UserType}");
                                                 UserUtility.SearchUserById(currentUser, userService);
                                                 break;
                                             case 2:
                                                 Console.Clear();
-                                                RSGymUtility.WriteTitle("Search User by Username");
+                                                RSGymUtility.WriteTitle($"Search User by Username \t\t| Profile:{currentUser.UserType}");
                                                 UserUtility.SearchUserByUsername(currentUser, userService);
                                                 break;
                                             default:
@@ -117,7 +117,7 @@ namespace RSGymUserAdministration
                                         break;
                                     case 4:
                                         Console.Clear();
-                                        RSGymUtility.WriteTitle("List Users", "", "\n");
+                                        RSGymUtility.WriteTitle($"List Users \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         UserUtility.ListAllUsers(userService);
                                         RSGymUtility.PauseConsole();
                                         break;
@@ -136,14 +136,14 @@ namespace RSGymUserAdministration
                                     case 1:
                                         Console.Clear();
                                         Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        RSGymUtility.WriteTitle("Search User", "", "\n");
+                                        RSGymUtility.WriteTitle($"Search User \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         UserUtility.SearchUserByUsername(currentUser, userService);
                                         RSGymUtility.PauseConsole();
                                         break;
 
                                     case 2:
                                         Console.Clear();
-                                        RSGymUtility.WriteTitle("List Users", "", "\n");
+                                        RSGymUtility.WriteTitle($"List Users \t\t| Profile:{currentUser.UserType}", "", "\n");
                                         UserUtility.ListAllUsers(userService);
                                         RSGymUtility.PauseConsole();
                                         break;

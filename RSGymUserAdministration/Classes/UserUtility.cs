@@ -111,24 +111,30 @@ namespace RSGymUserAdministration.Classes
                     RSGymUtility.WriteMessage($"New Name: {loggedInUser.Username}> ", "\n", "");
                     string newName = Console.ReadLine();
                     user.Name = newName;
-                    userService.UpdateUser(loggedInUser, user.Username, user.Password, user.UserType);
-                    RSGymUtility.WriteMessage("New name seccessfully updated.");
+                    userService.UpdateUser(loggedInUser, user.Username, user.Password, user.UserType, null);
+                    RSGymUtility.WriteMessage("New name seccessfully updated.", "\n", "");
                     break;
 
                 case 2:
                     string newPassword = CapturePassword(loggedInUser);
-                    userService.UpdateUser(loggedInUser, user.Username, newPassword, user.UserType);
-                    RSGymUtility.WriteMessage("Password successfully updated.");
+                    userService.UpdateUser(loggedInUser, user.Username, newPassword, user.UserType, null);
+                    RSGymUtility.WriteMessage("Password successfully updated.", "\n", "");
                     break;
 
                 case 3:
                     UserType newUserType = CaptureUserType(loggedInUser);
-                    userService.UpdateUser(loggedInUser, user.Username, user.Password, newUserType);
-                    RSGymUtility.WriteMessage("UserType successfully updated.");
+                    userService.UpdateUser(loggedInUser, user.Username, user.Password, newUserType, null);
+                    RSGymUtility.WriteMessage("UserType successfully updated.", "\n", "");
+                    break;
+                case 4:
+                    RSGymUtility.WriteMessage($"New phone number: {loggedInUser.Username}> ", "\n", "");
+                    string phoneNumber = Console.ReadLine();
+                    userService.UpdateUser(loggedInUser, user.Username, user.Password, user.UserType, phoneNumber);
+                    RSGymUtility.WriteMessage("Phone number successfully updated.", "\n", "");
                     break;
 
                 default:
-                    RSGymUtility.WriteMessage("Invalid option.");
+                    RSGymUtility.WriteMessage("Invalid option.", "\n", "");
                     break;
             }
         }

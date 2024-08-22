@@ -12,7 +12,7 @@ namespace RSGymUserAdministration.Interfaces
     {
         void CreateUser(User adminUser, string name, string username, string password, string phoneNumber);
         void CreateUser(User adminUser, string name, string username, string password, UserType userType);
-        void UpdateUser(User adminUser, string username, string newPassword, UserType newUserType);
+        void UpdateUser(User adminUser, string username, string newPassword, UserType newUserType, string newPhoneNumber);
         User GetUserById(User adminUser, int id);
         User GetUserByUsername(string username);
         IEnumerable<User> GetAllUsers();

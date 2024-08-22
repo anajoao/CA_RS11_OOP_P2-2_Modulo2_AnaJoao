@@ -163,7 +163,7 @@ namespace RSGymUserAdministration.Classes
             {
                 {"1.", " Admin"},
                 {"2.", " Power"},
-                {"2.", " Simple"},
+                {"3.", " Simple"},
             };
 
 
@@ -199,6 +199,7 @@ namespace RSGymUserAdministration.Classes
                 {"1.", " Name"},
                 {"2.", " Password"},
                 {"3.", " User Type"},
+                {"4.", " Phone Number"},
             };
 
 

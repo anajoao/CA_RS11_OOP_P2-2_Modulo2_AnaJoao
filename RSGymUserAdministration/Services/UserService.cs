@@ -56,11 +56,11 @@ namespace RSGymUserAdministration.Services
             _userRepository.Add(newUser);
         }
 
-        public void UpdateUser(User adminUser, string username, string newPassword, UserType newUserType)
+        public void UpdateUser(User adminUser, string username, string newPassword, UserType newUserType, string newPhoneNumber = null)
         {
             if (adminUser.UserType != UserType.AdminUser)
             {
-                throw new UnauthorizedAccessException("Only AdminUsers can update users.");
+                throw new ArgumentException("Only AdminUsers can update users.");
             }
 
             User user = _userRepository.GetByUsername(username);
@@ -68,15 +68,22 @@ namespace RSGymUserAdministration.Services
             {
                 user.Password = newPassword;
                 user.UserType = newUserType;
-                _userRepository.Update(user);
+                
             }
+
+            if (user is AdminUser adminToUpdate && newPhoneNumber != null)
+            {
+                adminToUpdate.PhoneNumber = newPhoneNumber;
+            }
+
+            _userRepository.Update(user);
         }
 
         public User GetUserById(User adminUser, int id)
         {
             if (adminUser.UserType != UserType.AdminUser)
             {
-                throw new UnauthorizedAccessException("Only AdminUsers can update users.");
+                throw new ArgumentException("Only AdminUsers can update users.");
             }
 
             return _userRepository.GetById(id);

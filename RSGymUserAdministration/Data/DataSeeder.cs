@@ -11,10 +11,12 @@ namespace RSGymUserAdministration.Data
 {
     internal class DataSeeder
     {
+        private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
 
-        public DataSeeder(IUserService userService)
+        public DataSeeder(IUserRepository userRepository, IUserService userService)
         {
+            _userRepository = userRepository;
             _userService = userService;
         }
 
@@ -24,7 +26,7 @@ namespace RSGymUserAdministration.Data
             User admin = new AdminUser("Ana Oliveira", "admin", "adminpw", "912222233");
 
             // Adicionar o AdminUser ao repositório
-            _userService.CreateUser(admin, "Ana Oliveira", "admin", "adminpw", "912222233");
+            _userRepository.Add(admin);
 
             // Usar o AdminUser para criar outros tipos de usuários
             _userService.CreateUser(admin, "Carla Santos", "pUser", "powerpw", UserType.PowerUser);
