@@ -20,11 +20,37 @@ namespace RSGymUserAdministration.Services
             _formatter = formatter; 
         }
 
-        public void CreateUser(User adminUser, User newUser)
+        public void CreateUser(User adminUser, string name, string username, string password, string phoneNumber)
         {
             if (adminUser.UserType != UserType.AdminUser)
             {
-                throw new UnauthorizedAccessException("Apenas administradores podem criar novos usuários.");
+                throw new UnauthorizedAccessException("Only AdminUsers can create new users.");
+            }
+
+            var newUser = new AdminUser(name, username, password, phoneNumber);
+            _userRepository.Add(newUser);
+        }
+
+        // Método para criar PowerUser e SimpleUser sem PhoneNumber
+        public void CreateUser(User adminUser, string name, string username, string password, UserType userType)
+        {
+            if (adminUser.UserType != UserType.AdminUser)
+            {
+                throw new UnauthorizedAccessException("Only AdminUsers can create new users.");
+            }
+
+            User newUser;
+
+            switch (userType)
+            {
+                case UserType.PowerUser:
+                    newUser = new PowerUser(name, username, password);
+                    break;
+                case UserType.SimpleUser:
+                    newUser = new SimpleUser(name, username, password);
+                    break;
+                default:
+                    throw new ArgumentException("Invalid user.");
             }
 
             _userRepository.Add(newUser);
@@ -34,7 +60,7 @@ namespace RSGymUserAdministration.Services
         {
             if (adminUser.UserType != UserType.AdminUser)
             {
-                throw new UnauthorizedAccessException("Apenas administradores podem editar usuários.");
+                throw new UnauthorizedAccessException("Only AdminUsers can update users.");
             }
 
             User user = _userRepository.GetByUsername(username);
@@ -50,7 +76,7 @@ namespace RSGymUserAdministration.Services
         {
             if (adminUser.UserType != UserType.AdminUser)
             {
-                throw new UnauthorizedAccessException("Apenas administradores podem editar usuários.");
+                throw new UnauthorizedAccessException("Only AdminUsers can update users.");
             }
 
             return _userRepository.GetById(id);

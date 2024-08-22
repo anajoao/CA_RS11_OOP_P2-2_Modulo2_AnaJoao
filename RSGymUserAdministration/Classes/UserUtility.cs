@@ -18,8 +18,27 @@ namespace RSGymUserAdministration.Classes
 
         internal static void InfoCreateUser(User loggedInUser, IUserService userService)
         {
+            // Mostrar o menu para escolher o tipo de usuário a ser criado
+            int userTypeOption = AppUtility.CreateUserMenu(loggedInUser);
             UserType userType;
 
+            switch (userTypeOption)
+            {
+                case 1:
+                    userType = UserType.AdminUser;
+                    break;
+                case 2:
+                    userType = UserType.PowerUser;
+                    break;
+                case 3:
+                    userType = UserType.SimpleUser;
+                    break;
+                default:
+                    RSGymUtility.WriteMessage("Invalid option selected.", "\n", "");
+                    return;
+            }
+
+            // Solicitar as informações comuns a todos os tipos de usuários
             RSGymUtility.WriteMessage($"Full name: {loggedInUser.Username}> ", "\n", "");
             string name = Console.ReadLine();
 
@@ -29,14 +48,19 @@ namespace RSGymUserAdministration.Classes
             RSGymUtility.WriteMessage($"Password: {loggedInUser.Username}> ", "\n", "");
             string password = Console.ReadLine();
 
-            do
+            if (userType == UserType.AdminUser)
             {
-                RSGymUtility.WriteMessage($"Select the User Type (Admin, PowerUser, SimpleUser): {loggedInUser.Username}> ", "\n", "");
-            } while (!Enum.TryParse(Console.ReadLine(), out userType));
+                RSGymUtility.WriteMessage($"Phone number: {loggedInUser.Username}> ", "\n", "");
+                string phoneNumber = Console.ReadLine();
 
-            User newUser = new User(name, username, password, userType);
-
-            userService.CreateUser(loggedInUser, newUser);
+                // Chama o método CreateUser para AdminUser
+                userService.CreateUser(loggedInUser, name, username, password, phoneNumber);
+            }
+            else
+            {
+                // Chama o método CreateUser para PowerUser ou SimpleUser
+                userService.CreateUser(loggedInUser, name, username, password, userType);
+            }
 
             RSGymUtility.WriteMessage("New user created successfully.", "\n", "");
         }

@@ -18,6 +18,8 @@ namespace RSGymUserAdministration.Classes
             set {}
         }
 
+        public string PhoneNumber {  get; set; }
+
 
         #endregion
 
@@ -27,8 +29,9 @@ namespace RSGymUserAdministration.Classes
         {
         }
 
-        public AdminUser(string name, string username, string password) : base(name, username, password, UserType.AdminUser)
+        public AdminUser(string name, string username, string password, string phoneNumber) : base(name, username, password, UserType.AdminUser)
         {
+            PhoneNumber = phoneNumber;
         }
         #endregion
     }

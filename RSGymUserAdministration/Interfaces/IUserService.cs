@@ -10,7 +10,8 @@ namespace RSGymUserAdministration.Interfaces
 {
     internal interface IUserService
     {
-        void CreateUser(User adminUser, User newUser);
+        void CreateUser(User adminUser, string name, string username, string password, string phoneNumber);
+        void CreateUser(User adminUser, string name, string username, string password, UserType userType);
         void UpdateUser(User adminUser, string username, string newPassword, UserType newUserType);
         User GetUserById(User adminUser, int id);
         User GetUserByUsername(string username);

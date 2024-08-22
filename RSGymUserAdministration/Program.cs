@@ -29,7 +29,7 @@ namespace RSGymUserAdministration
                 IUserService userService = new UserService(userRepository, formatter);
                 ILoginService loginService = new LoginService(userService);
 
-                // Inicialização dos dados (seeding)
+                // Dados iniciais (seeding)
                 DataSeeder seeder = new DataSeeder(userService);
                 seeder.Seed();
 

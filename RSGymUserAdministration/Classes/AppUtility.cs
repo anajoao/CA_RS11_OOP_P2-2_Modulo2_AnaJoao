@@ -155,6 +155,41 @@ namespace RSGymUserAdministration.Classes
             return option;
         }
 
+        internal static int CreateUserMenu(User user)
+        {
+            int option;
+
+            string[,] createUserMenu =
+            {
+                {"1.", " Admin"},
+                {"2.", " Power"},
+                {"2.", " Simple"},
+            };
+
+
+            Console.Clear();
+
+            RSGymUtility.WriteTitle($"Create User Menu \t\t| Profile:{user.UserType}", "", "\n\n");
+
+            for (int r = 0; r < createUserMenu.GetLength(0); r++)
+            {
+                for (int c = 0; c < 2; c++)
+                {
+                    RSGymUtility.WriteMessage($"{createUserMenu[r, c]}");
+                }
+
+                RSGymUtility.WriteMessage("\n");
+            }
+
+            do
+            {
+                RSGymUtility.WriteMessage($"{user.Username}> ", "\n");
+
+            } while (!int.TryParse(Console.ReadLine(), out option));
+
+            return option;
+        }
+
         internal static int EditMenu(User user)
         {
             int option;

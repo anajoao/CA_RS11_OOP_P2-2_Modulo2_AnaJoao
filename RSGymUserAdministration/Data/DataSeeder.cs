@@ -1,4 +1,5 @@
 ﻿using RSGymUserAdministration.Classes;
+using RSGymUserAdministration.Enums;
 using RSGymUserAdministration.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,17 @@ namespace RSGymUserAdministration.Data
 
         public void Seed()
         {
-            User admin = new AdminUser("Ana Oliveira", "admin", "adminpw");
+            // AdminUser com o número de telefone
+            User admin = new AdminUser("Ana Oliveira", "admin", "adminpw", "912222233");
+
+            // PowerUser e SimpleUser
             User powerUser = new PowerUser("Carla Santos", "pUser", "powerpw");
             User simpleUser = new SimpleUser("Jose Maria", "sUser", "simplepw");
 
-            _userService.CreateUser(admin, admin);
-            _userService.CreateUser(admin, powerUser);
-            _userService.CreateUser(admin, simpleUser);
+            // Adiciona os users
+            _userService.CreateUser(admin, "Ana Oliveira", "admin", "adminpw", "912222233"); 
+            _userService.CreateUser(admin, "Carla Santos", "pUser", "powerpw", UserType.PowerUser); 
+            _userService.CreateUser(admin, "Jose Maria", "sUser", "simplepw", UserType.SimpleUser); 
         }
 
     }

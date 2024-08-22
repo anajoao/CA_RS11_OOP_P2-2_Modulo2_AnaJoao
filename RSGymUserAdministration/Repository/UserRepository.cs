@@ -12,9 +12,9 @@ namespace RSGymUserAdministration.Repository
     {
         private readonly List<User> users = new List<User>();
 
-        public void Add(IUser user)
+        public void Add(User user)
         {
-            users.Add((User)user);
+            users.Add(user);
         }
 
         public void Update(User user)

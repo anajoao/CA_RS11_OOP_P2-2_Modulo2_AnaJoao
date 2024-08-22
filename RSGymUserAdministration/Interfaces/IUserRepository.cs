@@ -9,7 +9,7 @@ namespace RSGymUserAdministration.Interfaces
 {
     internal interface IUserRepository
     {
-        void Add(IUser user);
+        void Add(User user);
         void Update(User user);
         User GetById(int id);
         User GetByUsername(string username);
