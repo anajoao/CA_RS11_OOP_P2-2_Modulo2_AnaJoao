@@ -20,17 +20,15 @@ namespace RSGymUserAdministration.Data
 
         public void Seed()
         {
-            // AdminUser com o número de telefone
+            // Criar o AdminUser explicitamente
             User admin = new AdminUser("Ana Oliveira", "admin", "adminpw", "912222233");
 
-            // PowerUser e SimpleUser
-            User powerUser = new PowerUser("Carla Santos", "pUser", "powerpw");
-            User simpleUser = new SimpleUser("Jose Maria", "sUser", "simplepw");
+            // Adicionar o AdminUser ao repositório
+            _userService.CreateUser(admin, "Ana Oliveira", "admin", "adminpw", "912222233");
 
-            // Adiciona os users
-            _userService.CreateUser(admin, "Ana Oliveira", "admin", "adminpw", "912222233"); 
-            _userService.CreateUser(admin, "Carla Santos", "pUser", "powerpw", UserType.PowerUser); 
-            _userService.CreateUser(admin, "Jose Maria", "sUser", "simplepw", UserType.SimpleUser); 
+            // Usar o AdminUser para criar outros tipos de usuários
+            _userService.CreateUser(admin, "Carla Santos", "pUser", "powerpw", UserType.PowerUser);
+            _userService.CreateUser(admin, "Jose Maria", "sUser", "simplepw", UserType.SimpleUser);
         }
 
     }

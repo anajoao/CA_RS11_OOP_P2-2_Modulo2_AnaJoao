@@ -16,7 +16,7 @@ namespace RSGymUserAdministration.Classes
         private string username;
         #endregion
         #region Properties
-        public static int NextId { get; set; } = 1;
+        public static int NextId = 1;
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Username

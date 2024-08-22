@@ -135,23 +135,30 @@ namespace RSGymUserAdministration.Classes
 
         internal static void SearchUserById(User loggedInUser, IUserService userService)
         {
-            RSGymUtility.WriteMessage($"User ID: {loggedInUser.Username}> ", "\n", "");
             int userId;
-            if (int.TryParse(Console.ReadLine(), out userId))
+            bool isValidId;
+
+            do
             {
-                User user = userService.GetUserById(loggedInUser, userId);
-                if (user != null)
+                RSGymUtility.WriteMessage($"User ID: {loggedInUser.Username}> ", "\n", "");
+                isValidId = int.TryParse(Console.ReadLine(), out userId);
+
+                if (!isValidId)
                 {
-                    RSGymUtility.WriteMessage($"User: {user.Username} - {user.Name}, User Type: {user.UserType}", "\n", "");
+                    RSGymUtility.WriteMessage("Invalid ID format. Please enter a valid Id.", "\n", "");
                 }
-                else
-                {
-                    RSGymUtility.WriteMessage("User not found.");
-                }
+            } while (!isValidId);
+
+            User user = userService.GetUserById(loggedInUser, userId);
+            if (user != null)
+            {
+                FullInfoFormatter formatter = new FullInfoFormatter();
+                string userInfo = formatter.FormatInfo(user);
+                RSGymUtility.WriteMessage($"User: {userInfo}", "\n", "");
             }
             else
             {
-                RSGymUtility.WriteMessage("Invalid ID format.");
+                RSGymUtility.WriteMessage("User not found.", "\n", "");
             }
         }
 
